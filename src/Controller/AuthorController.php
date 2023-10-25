@@ -109,7 +109,7 @@ public function deleteauthorwithzerobook( ManagerRegistry $doctrine): Response
    
     public function authorsSortedByEmail(AuthorRepository $authorRepository): Response
     {
-        $authors = $authorRepository->getAuthorsSortedByEmail();
+        $authors = $authorRepository->getAuthorsSortedByEmail2();
 
         // Vous pouvez renvoyer la liste triée d'auteurs à une vue Twig ou simplement la retourner en JSON, par exemple.
         return $this->render('author/authors_sorted_by_email.html.twig', [

@@ -60,7 +60,7 @@ public function searchBooks(Request $request, BookRepository $bookRepository): R
     $searchTerm = $request->query->get('search');
     $books = $bookRepository->findByRef($searchTerm);
 
-    return $this->render('book/search_results.html.twig', [
+    return $this->render('book/listBook.html.twig', [
         'books' => $books,
     ]);
 }
@@ -113,6 +113,18 @@ public function searchBooks(Request $request, BookRepository $bookRepository): R
 
     }
     
+/**
+ * @Route("/books-sorted-by-author", name="books_sorted_by_author")
+ */
+#[Route('/books-sorted-by-author', name: 'books_sorted_by_author')]
+public function booksSortedByAuthor(BookRepository $bookRepository): Response
+{
+    $books = $bookRepository->getBooksSortedByAuthor();
+
+    return $this->render('book/books_sorted_by_author.html.twig', [
+        'books' => $books,
+    ]);
+}
 
 
 

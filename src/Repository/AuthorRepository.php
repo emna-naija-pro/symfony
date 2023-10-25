@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Author;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Mapping\OrderBy;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -27,6 +28,14 @@ class AuthorRepository extends ServiceEntityRepository
             ->orderBy('a.email', 'ASC')
             ->getQuery()
             ->getResult();
+    }
+
+    public function getAuthorsSortedByEmail2()
+    {
+       $entitymanager=$this->getEntityManager();
+       $query=$entitymanager->createquery('select p FROM APP\Entity\Author  p Order BY p.email ASC' );
+
+         return $query->getResult();
     }
 //    /**
 //     * @return Author[] Returns an array of Author objects

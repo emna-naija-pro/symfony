@@ -59,6 +59,20 @@ class BookRepository extends ServiceEntityRepository
   }
 
   // Dans BookRepository.php
+public function getBooksSortedByAuthor()
+{
+    $entityManager = $this->getEntityManager();
+    $query = $entityManager->createQuery(
+        'SELECT b, a
+         FROM App\Entity\Book b
+         JOIN b.Author a
+         ORDER BY a.username ASC'
+    );
+
+    return $query->getResult();
+}
+
+  // Dans BookRepository.php
 // Dans BookRepository.php
 public function findByRef($searchTerm)
 {

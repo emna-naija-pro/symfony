@@ -1,14 +1,42 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Liste des livres triés par auteur</title>
-</head>
-<body>
-    <h1>Liste des livres triés par auteur</h1>
-    <ul>
-        {% for book in books %}
-            <li>{{ book.title }} (Auteur : {{ book.author.username }})</li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+<table border="1">
+    <tr>
+        <td>ref</td> 
+        <td>title</td> 
+        <td>date</td> 
+        <td>published</td> 
+        <td>category</td> 
+        <td>author</td> 
+  
+    </tr>
+    {% for book in books %}
+        <tr>
+            <td>{{ book.ref}}</td>
+            <td>{{ book.title}}</td>
+              <td>{{ book.publicationDate|date('Y-m-d H:i:s') }}</td>
+              <td>{{ book.published}}</td>
+               <td>{{ book.category}}</td>
+            <td>{{ book.author.username }}</td>
+          <td>
+                <a href="{{ path('appbook_edit', {'ref': book.ref}) }}">Edit</a>
+
+            </td>
+          <td>
+                <a href="{{ path('deletebook', {'ref': book.ref}) }}">delete</a>
+
+            </td>
+            <td>
+                <a href="{{ path('showbook', {'ref': book.ref}) }}">show</a>
+
+            </td>
+        </tr>
+        
+    {% endfor %}
+    
+</table>
+
+
+
+
+
+
+

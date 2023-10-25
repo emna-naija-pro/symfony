@@ -1,0 +1,42 @@
+<table border="1">
+    <tr>
+        <td>ref</td>
+        <td>title</td>
+        <td>date</td>
+        <td>category</td>
+        <td>author</td>
+    </tr>
+
+    {% if publishedBooks|length > 0 %}
+        {% for book in publishedBooks %}
+            <tr>
+                <td>{{ book.ref }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.publicationDate|date('Y-m-d H:i:s') }}</td>
+                <td>{{ book.category }}</td>
+                <td>{{ book.author.username }}</td>
+                <td>
+                <a href="{{ path('appbook_edit', {'ref': book.ref}) }}">Edit</a>
+
+            </td>
+          <td>
+                <a href="{{ path('deletebook', {'ref': book.ref}) }}">delete</a>
+
+            </td>
+            <td>
+                <a href="{{ path('showbook', {'ref': book.ref}) }}">show</a>
+
+            </td>
+            </tr>
+        {% endfor %}
+         
+        <p>Nombre de livres publiés : {{ publishedBooks|length }}</p>
+<p>Nombre de livres non publiés : {{ (allBooks|length - publishedBooks|length) }}</p>
+
+    {% else %}
+        <tr>
+            <td colspan="5">No Books found</td>
+        </tr>
+    {% endif %}
+</table>
+<a href="{{ path('app_book_add2') }}" class="btn btn-primary">Create New</a>

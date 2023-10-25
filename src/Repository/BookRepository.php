@@ -58,5 +58,17 @@ class BookRepository extends ServiceEntityRepository
        return $req;
   }
 
+  // Dans BookRepository.php
+// Dans BookRepository.php
+public function findByRef($searchTerm)
+{
+    return $this->createQueryBuilder('b')
+        ->andWhere('b.ref = :searchTerm')
+        ->setParameter('searchTerm', $searchTerm)
+        ->getQuery()
+        ->getResult();
+}
+
+
 
 }

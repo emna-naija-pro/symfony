@@ -3,6 +3,7 @@
 namespace App\Controller;
 use App\Entity\Book;
 use App\Form\BookType;
+use App\Repository\BookRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -48,6 +49,21 @@ class BookController extends AbstractController
     }
     
     */
+
+
+    /**
+ * @Route("/search-books", name="search_books")
+ */
+#[Route('/search-books', name: 'search_books')]
+public function searchBooks(Request $request, BookRepository $bookRepository): Response
+{
+    $searchTerm = $request->query->get('search');
+    $books = $bookRepository->findByRef($searchTerm);
+
+    return $this->render('book/search_results.html.twig', [
+        'books' => $books,
+    ]);
+}
     #[Route('/book/add2', name: 'app_book_add2')]
     public function add2(ManagerRegistry $doctrine,Request $req): Response
     {

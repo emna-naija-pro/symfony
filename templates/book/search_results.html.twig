@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Résultats de la recherche</title>
+</head>
+<body>
+    <h1>Résultats de la recherche</h1>
+    <ul>
+        {% for book in books %}
+            <li>{{ book.title }} - {{ book.ref }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -34,6 +34,14 @@
     
 </table>
 
+
 <a href="{{ path('app_book_add2') }}" class="btn btn-secondary">create new</a>
 <hr>
   <a href="{{ path('list_published_books') }}" class="btn btn-secondary">showOnlypublishedbooks</a>
+
+
+
+<form method="get" action="{{ path('search_books') }}">
+    <input type="text" name="search" placeholder="Rechercher par référence">
+    <button type="submit">Rechercher</button>
+</form>

@@ -3,6 +3,7 @@
 namespace App\Controller;
 use App\Entity\Book;
 use App\Form\BookType;
+use App\Repository\AuthorRepository;
 use App\Repository\BookRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -178,6 +179,14 @@ public function showBookDetails(int $ref , ManagerRegistry $doctrine)
         ]);
     }
 
-
+    #[Route('/list', name: 'list_author')]
+    public function list(AuthorRepository $repo): Response
+    {
+        $authors =$repo->AuthorEmail2();
+           
+            
+        return $this->render('author/list.html.twig', [ 'authors' => $authors  
+        ]);
+    }
 
 }

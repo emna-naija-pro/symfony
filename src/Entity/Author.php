@@ -27,9 +27,21 @@ class Author
     #[ORM\OneToMany(mappedBy: 'Author', targetEntity: Book::class)]
     private Collection $books;
 
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Magazine::class)]
+    private Collection $relation;
+
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Histoire::class)]
+    private Collection $histoires;
+
+    
+    #[ORM\Column]
+   
     public function __construct()
     {
+        
         $this->books = new ArrayCollection();
+        $this->relation = new ArrayCollection();
+        $this->histoires = new ArrayCollection();
     }
 
    
@@ -105,6 +117,73 @@ class Author
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, magazine>
+     */
+    public function getRelation(): Collection
+    {
+        return $this->relation;
+    }
+
+    public function addReation(magazine $relation): static
+    {
+        if (!$this->relation->contains($relation)) {
+            $this->relation->add($relation);
+            $relation->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRelation(magazine $relation): static
+    {
+        if ($this->relation->removeElement($relation)) {
+            // set the owning side to null (unless already changed)
+            if ($relation->getAuthor() === $this) {
+                $relation->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Histoire>
+     */
+    public function getHistoires(): Collection
+    {
+        return $this->histoires;
+    }
+
+    public function addHistoire(Histoire $histoire): static
+    {
+        if (!$this->histoires->contains($histoire)) {
+            $this->histoires->add($histoire);
+            $histoire->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHistoire(Histoire $histoire): static
+    {
+        if ($this->histoires->removeElement($histoire)) {
+            // set the owning side to null (unless already changed)
+            if ($histoire->getAuthor() === $this) {
+                $histoire->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+   
+
+
+
+
+    
 
     
 

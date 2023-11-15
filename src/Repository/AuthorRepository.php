@@ -29,7 +29,7 @@ class AuthorRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-
+/*
     public function getAuthorsSortedByEmail2()
     {
        $entitymanager=$this->getEntityManager();
@@ -37,6 +37,8 @@ class AuthorRepository extends ServiceEntityRepository
 
          return $query->getResult();
     }
+
+    */
 //    /**
 //     * @return Author[] Returns an array of Author objects
 //     */

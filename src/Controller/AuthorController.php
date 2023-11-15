@@ -58,13 +58,15 @@ public function list(ManagerRegistry $doctrine): Response
 public function add2(ManagerRegistry $doctrine,request $req): Response
 {
     $author = new Author();
+    $form=$this->createForm(AuthorType::class,$author);
+    $form->handleRequest($req);//recup des donnees du form
     $entityManager = $doctrine->getManager();
     $AuthorRepo = $doctrine->getRepository(Author::class);
     $authors = $AuthorRepo->findAll();
 
-    $form=$this->createForm(AuthorType::class,$author);
+    
     $form->add('add',SubmitType::class);
-    $form->handleRequest($req);//recup des donnees du form
+   
    
     if ($form->isSubmitted())
     {
@@ -104,7 +106,7 @@ public function deleteauthorwithzerobook( ManagerRegistry $doctrine): Response
         return $this->redirectToRoute('list_author');
     }
 
-
+/*
     #[Route('/authors-sorted-by-email', name:'authors_sorted_by_email')]
    
     public function authorsSortedByEmail(AuthorRepository $authorRepository): Response
@@ -116,7 +118,7 @@ public function deleteauthorwithzerobook( ManagerRegistry $doctrine): Response
             'authors' => $authors,
         ]);
     }
-
+*/
     #[Route('/author/{id}', name: 'app_author')]
     
     public function index($name): Response
